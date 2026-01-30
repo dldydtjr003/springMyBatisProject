@@ -20,26 +20,26 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	@Transactional
-	public void create(Board b) throws Exception {
-		boardMapper.create(b);
+	public int create(Board b) throws Exception {
+		return boardMapper.create(b);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public Board read(Board b) throws Exception {
-		return boardMapper.read(b.getNo());
+		return boardMapper.read(b);
 	}
 
 	@Override
 	@Transactional
-	public void update(Board b) throws Exception {
-		boardMapper.update(b);
+	public int update(Board b) throws Exception {
+		return boardMapper.update(b);
 	}
 
 	@Override
 	@Transactional
-	public void delete(Board board) throws Exception {
-			boardMapper.delete(board.getNo());
+	public int delete(Board board) throws Exception {
+			return boardMapper.delete(board);
 	}
 
 	@Override

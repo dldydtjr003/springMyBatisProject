@@ -32,14 +32,16 @@ public class BoardController {
 	@PostMapping("/insert")
 	public String boardRegister(Board board, Model model) {
 		try {
-			boardService.create(board);
+			int count = boardService.create(board);
+			if (count > 0) {
+				model.addAttribute("message", "등록이 완료되었습니다.");
+				return "board/success";
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			model.addAttribute("message", "등록이 실패했습니다.");
-			return "board/failed";
 		}
-		model.addAttribute("message", "등록이 완료되었습니다.");
-		return "board/success";
+		model.addAttribute("message", "등록이 실패했습니다.");
+		return "board/failed";
 	}
 
 	@GetMapping("/boardList")
@@ -72,14 +74,16 @@ public class BoardController {
 	@GetMapping("/delete")
 	public String boardDelete(Model model, Board board) {
 		try {
-			boardService.delete(board);
+			int count = boardService.delete(board);
+			if (count > 0) {
+				model.addAttribute("message", " 삭제 성공했습니다.");
+				return "board/success";
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			model.addAttribute("message", " 삭제 실패했습니다.");
-			return "board/failed";
 		}
-		model.addAttribute("message", " 삭제 성공했습니다.");
-		return "board/success";
+		model.addAttribute("message", " 삭제 실패했습니다.");
+		return "board/failed";
 	}
 
 	@GetMapping("/updateForm")
@@ -101,14 +105,16 @@ public class BoardController {
 	@PostMapping("/update")
 	public String boardUpdate(Model model, Board board) {
 		try {
-			boardService.update(board);
+			int count = boardService.update(board);
+			if (count > 0) {
+				model.addAttribute("message", "수정이 완료되었습니다.");
+				return "board/success";
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			model.addAttribute("message", "수정이 실패했습니다.");
-			return "board/failed";
 		}
-		model.addAttribute("message", "수정이 완료되었습니다.");
-		return "board/success";
+		model.addAttribute("message", "수정이 실패했습니다.");
+		return "board/failed";
 	}
 
 	@GetMapping("/search")
